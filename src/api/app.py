@@ -8,6 +8,10 @@ import pandas as pd
 from fastapi import FastAPI, HTTPException
 
 from src.api.schemas import CustomerRequest
+from src.config.settings import (
+    APP_NAME,
+    APP_VERSION,
+)
 from src.services.prediction_service import PredictionService
 from src.utils.exceptions import (
     InvalidInputDataError,
@@ -17,23 +21,40 @@ from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
+# ==========================================================
+# FastAPI Application
+# ==========================================================
+
 app = FastAPI(
-    title="Customer Churn Intelligence API",
+    title=APP_NAME,
     description="Production-ready Machine Learning API for customer churn prediction.",
-    version="1.0.0",
+    version=APP_VERSION,
 )
+
+# ==========================================================
+# Initialize Prediction Service
+# ==========================================================
 
 prediction_service = PredictionService()
 
+
+# ==========================================================
+# Home Endpoint
+# ==========================================================
 
 @app.get("/")
 def home():
 
     return {
-        "message": "Customer Churn Intelligence API",
+        "application": APP_NAME,
+        "version": APP_VERSION,
         "status": "running",
     }
 
+
+# ==========================================================
+# Health Check Endpoint
+# ==========================================================
 
 @app.get("/health")
 def health():
@@ -42,6 +63,10 @@ def health():
         "status": "healthy"
     }
 
+
+# ==========================================================
+# Prediction Endpoint
+# ==========================================================
 
 @app.post("/predict")
 def predict(customer: CustomerRequest):
