@@ -1,238 +1,35 @@
 # Customer Churn Intelligence System
 
-Production-ready Machine Learning system for predicting customer churn and generating actionable retention recommendations through a REST API.
+This project predicts whether a telecom customer is likely to leave the service and provides a business recommendation based on the predicted risk.
 
----
+This project is built as an end-to-end machine learning application instead of just a trained model. It includes data preprocessing, model training, a FastAPI backend, Docker support, and deployment on Render, making the model accessible through a REST API.
+## Live Demo
 
-## Overview
+- **API:** https://customer-churn-intelligence-system.onrender.com
+- **Swagger UI:** https://customer-churn-intelligence-system.onrender.com/docs
 
-Customer churn is one of the most important business challenges for subscription-based companies. This project demonstrates how a machine learning model can be transformed into a deployable inference service using production-oriented software engineering practices.
+## Project Overview
 
-The system performs:
+Customer churn is one of the biggest challenges for subscription-based businesses because losing existing customers is often more expensive than acquiring new ones. Predicting which customers are likely to leave allows companies to take proactive retention actions.
 
-- Customer churn prediction
-- Business risk assessment
-- Automated retention recommendations
-- REST API inference using FastAPI
-- Input validation before prediction
-- Modular service-oriented architecture
+The goal of this project was not only to train a machine learning model but also to build a complete inference system that can be deployed and used in a production-like environment. The application accepts customer information through a REST API, processes the input using the same preprocessing pipeline used during training, predicts the probability of churn, and returns both the prediction and a business recommendation based on the customer's risk level.
 
----
+The project follows a modular structure with separate components for preprocessing, prediction, API services, configuration management, and deployment.
 
-## Features
+## Key Features
 
-- End-to-end ML inference pipeline
-- Modular project architecture
-- Input schema validation
-- Business recommendation engine
-- FastAPI REST API
-- Interactive Swagger documentation
-- Centralized logging
-- Custom exception handling
-- Reusable service layer
-
----
-
-## Tech Stack
-
-### Machine Learning
-
-- Python
-- Scikit-learn
-- XGBoost
-- Pandas
-- NumPy
-
-### Backend
-
-- FastAPI
-- Pydantic
-- Uvicorn
-
-### Software Engineering
-
-- Modular Architecture
-- Service Layer Pattern
-- Logging
-- Exception Handling
-- Git
-
----
-
-## Project Structure
-
-```text
-customer-churn-intelligence-system/
-│
-├── configs/
-├── data/
-├── docs/
-├── logs/
-├── models/
-├── notebooks/
-├── src/
-│   ├── api/
-│   ├── config/
-│   ├── inference/
-│   ├── loaders/
-│   ├── recommendations/
-│   ├── services/
-│   ├── utils/
-│   └── validators/
-│
-├── tests/
-├── requirements.txt
-└── README.md
-```
-
----
+- Predicts customer churn using an XGBoost classification model.
+- Uses a saved preprocessing pipeline to ensure consistent predictions.
+- Provides business recommendations based on predicted churn risk.
+- Exposes predictions through a FastAPI REST API.
+- Validates requests using Pydantic models.
+- Containerized with Docker for consistent deployment.
+- Deployed on Render with interactive Swagger API documentation.
+- Organized using a modular and production-oriented project structure.
 
 ## System Architecture
 
-```text
-                   Client
-                      │
-                      ▼
-               FastAPI REST API
-                      │
-                      ▼
-              Prediction Service
-                      │
-                      ▼
-              Churn Predictor
-             /                \
-            ▼                  ▼
-   Input Validator   Recommendation Engine
-            │
-            ▼
-     Trained ML Pipeline
-            │
-            ▼
-      Prediction Response
-```
 
----
-
-## Workflow
-
-1. Receive customer information through REST API.
-2. Validate request schema.
-3. Load trained model artifacts.
-4. Predict churn probability.
-5. Estimate business risk.
-6. Generate retention recommendation.
-7. Return structured JSON response.
-
----
-
-## API Endpoints
-
-### Health Check
-
-```
-GET /health
-```
-
----
-
-### Predict Customer Churn
-
-```
-POST /predict
-```
-
-Example Request
-
-```json
-{
-  "gender": "Female",
-  "SeniorCitizen": 0,
-  "Partner": "Yes",
-  "Dependents": "No",
-  "tenure": 1,
-  "PhoneService": "Yes",
-  "MultipleLines": "No",
-  "InternetService": "Fiber optic",
-  "OnlineSecurity": "No",
-  "OnlineBackup": "No",
-  "DeviceProtection": "No",
-  "TechSupport": "No",
-  "StreamingTV": "Yes",
-  "StreamingMovies": "Yes",
-  "Contract": "Month-to-month",
-  "PaperlessBilling": "Yes",
-  "PaymentMethod": "Electronic check",
-  "MonthlyCharges": 89.1,
-  "TotalCharges": 89.1
-}
-```
-
-Example Response
-
-```json
-{
-  "status": "success",
-  "data": {
-    "prediction": "Yes",
-    "probability": 0.9142,
-    "confidence": 91.42,
-    "risk_level": "High",
-    "priority": "Immediate",
-    "recommended_action": "Assign retention specialist, offer premium discount, and contact customer within 24 hours."
-  }
-}
-```
-
----
-
-## Installation
-
-Clone the repository
-
-```bash
-git clone <repository-url>
-```
-
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Run the API
-
-```bash
-uvicorn src.api.app:app --reload
-```
-
-Open Swagger UI
-
-```
-http://127.0.0.1:8000/docs
-```
-
----
-
-## Future Improvements
-
-- Docker deployment
-- Batch inference pipeline
-- Streamlit dashboard
-- MLflow experiment tracking
-- Automated testing with Pytest
-- CI/CD using GitHub Actions
-- Cloud deployment
-
----
-
-## Learning Outcomes
-
-This project demonstrates practical experience with:
-
-- Production ML inference
-- API development using FastAPI
-- Service-oriented architecture
-- Machine learning deployment
-- Input validation
-- Business logic integration
-- Modular Python application design
+<p align="center">
+  <img src="docs/images/archi.png" alt="System Architecture" width="900">
+</p>

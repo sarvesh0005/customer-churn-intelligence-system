@@ -16,6 +16,5 @@ data/interim/
 data/processed/
 
 # Future folders
-models/
 logs/
 reports/
