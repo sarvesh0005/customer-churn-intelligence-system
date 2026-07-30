@@ -33,3 +33,127 @@ The project follows a modular structure with separate components for preprocessi
 <p align="center">
   <img src="docs/images/archi.png" alt="System Architecture" width="900">
 </p>
+
+## Project Structure
+
+```text
+customer-churn-intelligence-system/
+│
+├── configs/                 # Configuration files
+├── docs/
+│   └── images/              # README images
+├── logs/                    # Application logs
+├── models/                  # Trained model artifacts
+│   ├── model.pkl
+│   ├── preprocessor.pkl
+│   ├── feature_columns.json
+│   └── metrics.json
+├── notebooks/               # Model development and experiments
+├── src/
+│   ├── api/
+│   ├── config/
+│   ├── core/
+│   ├── schemas/
+│   ├── services/
+│   └── utils/
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+├── .env
+└── README.md
+```
+
+## Technology Stack
+
+| Category | Technologies |
+|----------|--------------|
+| Programming Language | Python |
+| Machine Learning | XGBoost, Scikit-learn |
+| Data Processing | Pandas, NumPy |
+| API Framework | FastAPI |
+| Validation | Pydantic |
+| Deployment | Docker, Render |
+| Documentation | Swagger UI |
+| Version Control | Git, GitHub |
+
+## Machine Learning Pipeline
+
+The prediction workflow follows the same preprocessing steps used during model training to ensure consistent results during inference.
+
+```text
+Customer Data
+      │
+      ▼
+Input Validation (Pydantic)
+      │
+      ▼
+Data Preprocessing
+      │
+      ▼
+Feature Transformation
+      │
+      ▼
+XGBoost Model
+      │
+      ▼
+Churn Probability
+      │
+      ▼
+Risk Assessment
+      │
+      ▼
+Business Recommendation
+      │
+      ▼
+JSON Response
+```
+
+### Prediction Workflow
+
+1. The client sends customer information to the `/predict` endpoint.
+2. FastAPI validates the request using Pydantic models.
+3. The saved preprocessing pipeline transforms the input features.
+4. The processed data is passed to the trained XGBoost model.
+5. The predicted probability is converted into a churn risk level.
+6. A business recommendation is generated based on the predicted risk.
+7. The API returns the prediction, confidence score, risk level, and recommended action.
+
+## Screenshots
+
+### API Documentation
+
+The application provides interactive API documentation using Swagger UI, making it easy to test endpoints and understand request and response formats.
+
+<p align="center">
+  <img src="docs/images/swegger.png" alt="Swagger UI" width="900">
+</p>
+
+---
+
+### Prediction Response
+
+Example prediction returned by the API after processing customer information.
+
+<p align="center">
+  <img src="docs/images/prediction.png" alt="Prediction Response" width="900">
+</p>
+
+---
+
+### Project Repository
+
+Repository structure showing the modular organization of the project.
+
+<p align="center">
+  <img src="docs/images/github.png" alt="GitHub Repository" width="900">
+</p>
+
+---
+
+### Cloud Deployment
+
+Application successfully deployed on Render.
+
+<p align="center">
+  <img src="docs/images/rander.png" alt="Render Deployment" width="900">
+</p>
